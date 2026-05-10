@@ -128,5 +128,7 @@ def detail(index):
     post = posts[index]
     return render_template("detail.html", post=post)
 
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
