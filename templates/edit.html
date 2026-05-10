@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>編集</title>
+</head>
+<body>
+
+<h1>投稿編集</h1>
+
+<form action="/update/{{ index }}" method="post">
+
+    <p>タイトル：
+        <input type="text" name="title" value="{{ post.title }}">
+    </p>
+
+    <p>材料：
+        <input type="text" name="material" value="{{ post.material }}">
+    </p>
+
+    <p>予算：
+        <input type="text" name="price" value="{{ post.price }}">
+    </p>
+
+    <button type="submit">更新</button>
+
+</form>
+
+</body>
+</html>

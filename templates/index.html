@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hirameki Box</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>Hirameki Box</h1>
+    <p>アイデア共有サイトへようこそ</p>
+
+    <hr>
+ <h2>検索</h2>
+<form method="get" class="search-box">
+    <input type="text" name="keyword" placeholder="検索">
+    <button type="submit">検索</button>
+</form>
+
+<h2>カテゴリ</h2>
+
+<div class="category-buttons">
+    <a href="/">すべて</a>
+    <a href="/?category=インテリア">
+        インテリア
+    </a>
+    <a href="/?category=収納">
+        収納
+    </a>
+    <a href="/?category=ライフハック">
+        ライフハック
+    </a>
+    <a href="/?category=工作">
+        工作
+    </a>
+</div>
+
+<h2>🔥 人気DIY TOP3</h2>
+<div class="ranking-container">
+{% for post in popular_posts %}
+<div class="post-card">
+
+    
+
+    <h3>
+        <p>{{ loop.index }}位</p>
+        <a href="/detail/{{ loop.index0 }}">
+            {{ post.title }}
+        </a>
+    </h3>
+
+    <img
+        src="{{ url_for('static', filename='uploads/' + post.image) }}"
+        width="200"
+    >
+
+    <p>👍 {{ post.get("likes", 0) }}</p>
+
+</div>
+
+{% endfor %}
+</div>
+
+<!--投稿一覧-->
+    <h2>投稿一覧</h2>
+
+    {% for post in posts %}
+        <div class="post-card">
+            <h3>
+             <a href="/detail/{{ loop.index0 }}">
+              {{ post.title }}
+             </a>
+            </h3>
+            <p>材料：{{ post.material }}</p>
+            <p>予算：{{ post.price }}</p>
+            <p>カテゴリ：{{ post.category }}</p>
+            <img src="{{ url_for('static', filename='uploads/' + post.image) }}" width="300">
+            <p>👍 {{ post.get("likes", 0) }}</p>
+
+        <form action="/like/{{ loop.index0 }}" method="post">
+         <button type="submit">いいね</button>
+        </form>
+
+        <form action="/delete/{{ loop.index0 }}" method="post">
+         <button type="submit">削除</button>
+        </form>
+
+        <form action="/edit/{{ loop.index0 }}">
+         <button type="submit">編集</button>
+        </form>
+
+        </div>
+    {% endfor %}
+
+<!--投稿フォーム--> 
+    <h2>投稿する</h2>
+
+<form action="/add" method="post" enctype="multipart/form-data">
+    <p>タイトル：<input type="text" name="title"></p>
+    <p>材料：<input type="text" name="material"></p>
+    <p>予算：<input type="text" name="price"></p>
+    <p>作り方：</p>
+    <textarea name="steps" rows="5" cols="40"></textarea>
+    <p>画像：<input type="file" name="image"></p>
+    <p>カテゴリ：<select name="category">
+    <option value="インテリア">インテリア</option>
+    <option value="収納">収納</option>
+    <option value="ライフハック">ライフハック</option>
+    <option value="工作">工作</option>
+</select>
+</p>
+    <button type="submit">投稿</button>
+    
+</form>
+
+<hr>
+</div>
+</body>
+</html>

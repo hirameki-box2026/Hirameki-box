@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ post.title }}</title>
+</head>
+<body>
+
+<h1>{{ post.title }}</h1>
+
+<img src="{{ url_for('static', filename='uploads/' + post.image) }}" width="400">
+
+<p>👍 {{ post.get("likes", 0) }}</p>
+
+<p>カテゴリ：{{ post.category }}</p>
+
+<p>材料：{{ post.material }}</p>
+
+<p>予算：{{ post.price }}</p>
+
+<h3>作り方</h3>
+<p style="white-space: pre-wrap;">{{ post.steps }}</p>
+
+
+
+<br><br>
+
+<a href="/">← 戻る</a>
+
+</body>
+</html>
