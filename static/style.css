@@ -95,3 +95,26 @@ form {
     width: calc(33.33% - 15px);
     box-sizing: border-box;
 }
+
+@media screen and (max-width: 768px) {
+    .post-card {
+        width: 100%;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+.post-card {
+    margin-bottom: 15px;
+}
+
+body {
+    font-size: 16px;
+}
